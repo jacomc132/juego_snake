@@ -74,8 +74,14 @@ while run == True:
     if player1.position == fruit1.position and primera_fruta == False:
         fruit1.create_random_cords()
         fruit1.position = (fruit1.x,fruit1.y)
+        player1.score += 1
 
     my_display.blit(fruit_image,fruit1.position)
+    
+    #Añadir puntaje:
+    text = display1.font.render('Score: '+str(player1.score), 1, (255,255,255))
+    display1.my_display.blit(text,(1400,20))
+
 
     #Cuando player se sale de los bordes:
     if player1.x == 50 or  player1.x == 1550 or player1.y == 0 or player1.y == 850:

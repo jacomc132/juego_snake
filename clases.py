@@ -11,6 +11,7 @@ class Player:
         self.display = display
         self.color1 = color1
         self.color2 = color2
+        self.score = 0
         
     
 
@@ -29,6 +30,7 @@ class Display:
         self.display_width = display_width
         self.color1 = color1
         self.color2 =color2
+        self.font = pygame.font.SysFont('comicsans',40,True)
     
 
 
