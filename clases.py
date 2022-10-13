@@ -1,9 +1,10 @@
 import pygame
+from random import choice
 #Clase que recibe altura, anchura y display para luego dibujar en este display un cuadrado en posicion 50,50.
 class Player:
     def __init__(self,width,height,display,color1,color2):
-        self.x = 100
-        self.y = 100
+        self.x = 300
+        self.y = 300
         self.position = (self.x,self.y)
         self.height = height
         self.width = width
@@ -15,7 +16,7 @@ class Player:
 
 
     def draw_character(self):
-        pygame.draw.rect(self.display,self.color1,(self.x,self.y,self.width,self.height))
+        pygame.draw.rect(self.display, self.color1,(self.x, self.y, self.width, self.height))
         
     
 
@@ -45,7 +46,7 @@ class Display:
 
 
 
-    def create_margin(self,margin_color,margin_width,margin_heigth):
+    def create_margin(self, margin_color, margin_width, margin_heigth):
         self.margin_color = margin_color
         self.margin_width = margin_width
         self.margin_heigth = margin_heigth
@@ -74,6 +75,29 @@ class Display:
             pygame.draw.rect(self.my_display,self.margin_color,(x,self.y,self.margin_heigth,self.margin_width))
 
 
+
+class Fruit:
+    def __init__(self, width, heigth, display, color):
+        self.width = width
+        self.heigth = heigth
+        self.display = display
+        self.color = color
+        self.x_positions = []
+        self.y_positions = []
+        self.x = 250
+        self.y = 450
+        self.position = (self.x,self.y)
+
+
+
+
+    def create_random_cords(self):
+        self.x_positions = [i for i in range(100,1550,50)]
+        self.y_positions = [i for i in range(50,850,50)]
+        self.x = choice(self.x_positions)
+        self.y = choice(self.y_positions)
+        
+        
         
         
 

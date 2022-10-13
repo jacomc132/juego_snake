@@ -1,8 +1,12 @@
 from clases import Player
 from clases import Display
 import pygame
+from random import randint
+from clases import Fruit
 
 pygame.init()
+
+fruit_image = pygame.image.load('z_image.png')
 blue1 = (216,243,220)
 blue2 = (183,228,199)
 blue3 = (116,198,157)
@@ -17,15 +21,17 @@ display_heigth = 900
 display_width = 1600
 initial_point = 0
 run = True
-borders_position = [()]
+primera_fruta = True
+
 
 
 my_display = pygame.display.set_mode((display_width,display_heigth))
 pygame.display.set_caption("Snake game")
 
-#Instanciación clase Player y display:
-player1 = Player(50,50,my_display,red,ligth_blue,borders_position)
+#Instanciación clase Player,display,fruit:
+player1 = Player(50,50,my_display,red,ligth_blue)
 display1 = Display(my_display,display_heigth,display_width,blue1,blue2)
+fruit1 = Fruit(20,20,my_display,green_lima)
 
 #Ejecuión constante del juego:
 while run == True:
@@ -39,7 +45,7 @@ while run == True:
 
 
 
-    #Recorrer acciones ejecutadas por el usuario:
+    #Evento sucedido en caso de que el usuario haga click en la x posterior:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -57,12 +63,23 @@ while run == True:
     elif keys[pygame.K_UP] and player1.y>(initial_point):
         player1.y -= 50
     
-
+    #Dibujar primera fruta:
     player1.position = (player1.x,player1.y)
+    if primera_fruta == True:
+        fruit1.position = (500,600)
+        if player1.position == fruit1.position:
+            primera_fruta = False
+
+    #Dibujar y borrar frutas siguientes:
+    if player1.position == fruit1.position and primera_fruta == False:
+        fruit1.create_random_cords()
+        fruit1.position = (fruit1.x,fruit1.y)
+
+    my_display.blit(fruit_image,fruit1.position)
 
     #Cuando player se sale de los bordes:
     if player1.x == 50 or  player1.x == 1550 or player1.y == 0 or player1.y == 850:
-        run = False #Add gameover screen
+        run = False #task: Add gameover screen
 
 
 
