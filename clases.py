@@ -12,6 +12,7 @@ class Player:
         self.color1 = color1
         self.color2 = color2
         self.score = 0
+        self.direction = 'none'
         
     
 

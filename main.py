@@ -35,7 +35,7 @@ fruit1 = Fruit(20,20,my_display,green_lima)
 
 #Ejecuión constante del juego:
 while run == True:
-    pygame.time.delay(100)
+    pygame.time.delay(115)
 
 
     #Crear cuadrícula:
@@ -55,13 +55,25 @@ while run == True:
     #Al presionar teclas:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT] and player1.x<(display_width - 50):
-        player1.x += 50
+        player1.direction = 'rigth'
     elif keys[pygame.K_LEFT] and player1.x>(initial_point + 50):
-        player1.x -= 50
+        player1.direction = 'left'
     elif keys[pygame.K_DOWN] and player1.y<(display_heigth - 50):
-        player1.y += 50
+        player1.direction = 'down'
     elif keys[pygame.K_UP] and player1.y>(initial_point):
+        player1.direction = 'up'
+
+    #Desplazamiento de jugador:
+    if player1.direction == 'rigth':
+        player1.x += 50
+    elif player1.direction == 'left':
+        player1.x -= 50
+    elif player1.direction == 'up':
         player1.y -= 50
+    elif player1.direction == 'down':
+        player1.y += 50
+
+
     
     #Dibujar primera fruta:
     player1.position = (player1.x,player1.y)
