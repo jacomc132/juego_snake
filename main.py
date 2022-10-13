@@ -7,6 +7,7 @@ from clases import Fruit
 pygame.init()
 
 fruit_image = pygame.image.load('z_image.png')
+game_over_image = pygame.image.load('game_over.png')
 blue1 = (216,243,220)
 blue2 = (183,228,199)
 blue3 = (116,198,157)
@@ -49,6 +50,7 @@ while run == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+            pygame.quit()
 
 
 
@@ -106,5 +108,18 @@ while run == True:
 
 
 
-#Romper programa
-pygame.quit()
+#sección gameover:
+player1.game_over = True
+
+while player1.game_over == True:
+    display1.my_display.fill(ligth_blue)
+    #Imagen game_over:
+    display1.print_gameover_image(game_over_image,(500,200))
+    
+    
+    #Evento sucedido en caso de que el usuario haga click en la x posterior:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+
+    pygame.display.update()

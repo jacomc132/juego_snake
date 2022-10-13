@@ -13,6 +13,7 @@ class Player:
         self.color2 = color2
         self.score = 0
         self.direction = 'none'
+        self.game_over = False
         
     
 
@@ -76,6 +77,15 @@ class Display:
         self.y = 0
         for x in range(50,self.display_width,50):
             pygame.draw.rect(self.my_display,self.margin_color,(x,self.y,self.margin_heigth,self.margin_width))
+
+
+
+    def print_gameover_image(self,image,coords):
+        self.my_display.blit(image,coords)
+
+
+
+
 
 
 
