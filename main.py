@@ -6,8 +6,8 @@ from clases import Fruit
 
 pygame.init()
 
-fruit_image = pygame.image.load('z_image.png')
-game_over_image = pygame.image.load('game_over.png')
+fruit_image = pygame.image.load('./imagenes/z_image.png')
+game_over_image = pygame.image.load('./imagenes/game_over.png')
 blue1 = (216,243,220)
 blue2 = (183,228,199)
 blue3 = (116,198,157)
@@ -38,7 +38,8 @@ fruit1 = Fruit(20,20,my_display,green_lima)
 while run == True:
     pygame.time.delay(115)
 
-
+    player1.position = (player1.x,player1.y)
+    player1.previous_positions.append(player1.position)
     #Crear cuadrícula:
     display1.create_grid()
     #Crear margen:
@@ -78,19 +79,26 @@ while run == True:
 
     
     #Dibujar primera fruta:
-    player1.position = (player1.x,player1.y)
     if primera_fruta == True:
         fruit1.position = (500,600)
         if player1.position == fruit1.position:
             primera_fruta = False
+            
 
     #Dibujar y borrar frutas siguientes:
     if player1.position == fruit1.position and primera_fruta == False:
         fruit1.create_random_cords()
         fruit1.position = (fruit1.x,fruit1.y)
         player1.score += 1
-
+        player1.body_count += 1
     my_display.blit(fruit_image,fruit1.position)
+
+    
+
+    #Dibujar cuerpo serpiente:
+    player1.draw_snake_body(green_lima)
+
+    
     
     #Añadir puntaje:
     text = display1.font.render('Score: '+str(player1.score), 1, (255,255,255))
@@ -99,9 +107,10 @@ while run == True:
 
     #Cuando player se sale de los bordes:
     if player1.x == 50 or  player1.x == 1550 or player1.y == 0 or player1.y == 850:
-        run = False #task: Add gameover screen
+        run = False 
 
 
+    
 
     player1.draw_character()
     pygame.display.update()
@@ -112,6 +121,7 @@ while run == True:
 player1.game_over = True
 
 while player1.game_over == True:
+    pygame.time.delay(100)
     display1.my_display.fill(ligth_blue)
     #Imagen game_over:
     display1.print_gameover_image(game_over_image,(500,200))

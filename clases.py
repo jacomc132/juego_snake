@@ -2,7 +2,7 @@ import pygame
 from random import choice
 #Clase que recibe altura, anchura y display para luego dibujar en este display un cuadrado en posicion 50,50.
 class Player:
-    def __init__(self,width,height,display,color1,color2):
+    def __init__(self, width, height, display, color1, color2):
         self.x = 300
         self.y = 300
         self.position = (self.x,self.y)
@@ -14,12 +14,31 @@ class Player:
         self.score = 0
         self.direction = 'none'
         self.game_over = False
+        self.previous_positions = []
+        self.last_position = 0
+        self.body_count = 0
+        self.body_index = 0
+        
+        
         
     
 
-
+        #Dibujar cabeza serpiente:
     def draw_character(self):
         pygame.draw.rect(self.display, self.color1,(self.x, self.y, self.width, self.height))
+
+    
+
+
+
+    def draw_snake_body(self,color):
+        self.last_position = len(self.previous_positions)-1
+        self.body_index = self.last_position - self.body_count
+        while self.body_index < self.last_position:
+            x = self.previous_positions[self.body_index][0]
+            y = self.previous_positions[self.body_index][1]
+            pygame.draw.rect(self.display, color,(x, y, self.width, self.height))
+            self.body_index += 1
         
     
 
