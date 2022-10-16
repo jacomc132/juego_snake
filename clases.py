@@ -32,7 +32,7 @@ class Player:
 
 
     def draw_snake_body(self,color):
-        self.last_position = len(self.previous_positions)-1
+        self.last_position = len(self.previous_positions)
         self.body_index = self.last_position - self.body_count
         while self.body_index < self.last_position:
             x = self.previous_positions[self.body_index][0]
