@@ -18,6 +18,7 @@ class Player:
         self.last_position = 0
         self.body_count = 0
         self.body_index = 0
+        self.body_positions = []
         
         
         
@@ -31,15 +32,17 @@ class Player:
 
 
 
-    def draw_snake_body(self,color):
-        self.last_position = len(self.previous_positions)
+    def snake_body(self,color):
+        self.body_positions.clear()
+        self.last_position = len(self.previous_positions)-1
         self.body_index = self.last_position - self.body_count
         while self.body_index < self.last_position:
             x = self.previous_positions[self.body_index][0]
             y = self.previous_positions[self.body_index][1]
             pygame.draw.rect(self.display, color,(x, y, self.width, self.height))
+            self.body_positions.append((x,y))
             self.body_index += 1
-        
+            
     
 
 
@@ -130,6 +133,32 @@ class Fruit:
         self.y = choice(self.y_positions)
         
         
-        
-        
+
+
+class Button:
+    
+    def __init__(self, width, heigth, display, color1,color2, x, y):
+        self.width = width
+        self.heigth = heigth
+        self.display = display
+        self.color1 = color1
+        self.color2 = color2
+        self.x = x
+        self.y = y 
+        self.font = pygame.font.SysFont('comicsans',40,True)
+        self.x_positions = [x for x in range(self.x, (self.x+self.width) ,1)]
+        self.y_positions = [y for y in range(self.y, (self.y+self.heigth),1)]
+
+
+    def draw_button(self):
+        #Dibujar box con hover y sin hover:
+        if pygame.mouse.get_pos()[0] in self.x_positions and pygame.mouse.get_pos()[1] in self.y_positions:
+            pygame.draw.rect(self.display, self.color2,(self.x, self.y, self.width, self.heigth))
+        else:
+            pygame.draw.rect(self.display, self.color1,(self.x, self.y, self.width, self.heigth))
+        #Texto del cuadrado:
+        text = self.font.render('RETRY', 1, (255,255,255))
+        self.display.blit(text, (self.x +45, self.y+40))
+
+
 

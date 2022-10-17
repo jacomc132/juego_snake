@@ -1,5 +1,6 @@
 from clases import Player
 from clases import Display
+from clases import Button
 import pygame
 from random import randint
 from clases import Fruit
@@ -40,6 +41,7 @@ while run == True:
 
     player1.position = (player1.x,player1.y)
     player1.previous_positions.append(player1.position)
+    
     #Crear cuadrícula:
     display1.create_grid()
     #Crear margen:
@@ -76,7 +78,8 @@ while run == True:
     elif player1.direction == 'down':
         player1.y += 50
 
-
+    
+    
     
     #Dibujar primera fruta:
     if primera_fruta == True:
@@ -91,14 +94,15 @@ while run == True:
         fruit1.position = (fruit1.x,fruit1.y)
         player1.score += 1
         player1.body_count += 1
+        
     my_display.blit(fruit_image,fruit1.position)
 
     
 
-    #Dibujar cuerpo serpiente:
-    player1.draw_snake_body(green_lima)
-
-    
+    #Dibujar cuerpo serpiente y cuando se choca con el cuerpo:--------------------------------------------------
+    player1.snake_body(green_lima)
+    if player1.position in player1.body_positions:
+        run = False
     
     #Añadir puntaje:
     text = display1.font.render('Score: '+str(player1.score), 1, (255,255,255))
@@ -109,7 +113,7 @@ while run == True:
     if player1.x == 50 or  player1.x == 1550 or player1.y == 0 or player1.y == 850:
         run = False 
 
-
+    
     
 
     player1.draw_character()
@@ -117,15 +121,22 @@ while run == True:
 
 
 
+
 #sección gameover:
 player1.game_over = True
+#Instanciación de clase Button:
+button1 = Button(200,100,my_display,red,gray,650,650)
 
+#Ejecución constante de game_over:
 while player1.game_over == True:
-    pygame.time.delay(100)
-    display1.my_display.fill(ligth_blue)
+    
+    pygame.time.delay(115)
+
     #Imagen game_over:
     display1.print_gameover_image(game_over_image,(500,200))
     
+    #Desplegar botón de retry:
+    button1.draw_button()
     
     #Evento sucedido en caso de que el usuario haga click en la x posterior:
     for event in pygame.event.get():
