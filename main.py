@@ -39,9 +39,6 @@ while True:
     #Ejecuión constante del juego:
     while run == True:
         pygame.time.delay(115)
-
-        player1.position = (player1.x,player1.y)
-        player1.previous_positions.append(player1.position)
         
         #Crear cuadrícula:
         display1.create_grid()
@@ -79,7 +76,8 @@ while True:
         elif player1.direction == 'down':
             player1.y += 50
 
-        
+        player1.position = (player1.x,player1.y)
+        player1.previous_positions.append(player1.position)
         
         
         #Dibujar primera fruta:
@@ -98,12 +96,15 @@ while True:
             
         my_display.blit(fruit_image,fruit1.position)
 
-        
+
 
         #Dibujar cuerpo serpiente y cuando se choca con el cuerpo:--------------------------------------------------
         player1.snake_body(green_lima)
         if player1.position in player1.body_positions:
             run = False
+            
+        
+
         
         #Añadir puntaje:
         text = display1.font.render('Score: '+str(player1.score), 1, (255,255,255))
@@ -119,7 +120,8 @@ while True:
 
         player1.draw_character()
         pygame.display.update()
-
+        
+            
 
 
 

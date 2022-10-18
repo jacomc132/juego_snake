@@ -24,14 +24,14 @@ class Player:
         
     
 
-        #Dibujar cabeza serpiente:
+    #Dibujar cabeza serpiente:
     def draw_character(self):
         pygame.draw.rect(self.display, self.color1,(self.x, self.y, self.width, self.height))
 
     
 
 
-
+    #Dibujar cuerpo de serpiente:
     def snake_body(self,color):
         self.body_positions.clear()
         self.last_position = len(self.previous_positions)-1
@@ -39,11 +39,9 @@ class Player:
         while self.body_index < self.last_position:
             x = self.previous_positions[self.body_index][0]
             y = self.previous_positions[self.body_index][1]
-            pygame.draw.rect(self.display, color,(x, y, self.width, self.height))
             self.body_positions.append((x,y))
+            pygame.draw.rect(self.display, color,(x, y, self.width, self.height))
             self.body_index += 1
-            
-    
 
 
 
