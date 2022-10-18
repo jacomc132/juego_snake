@@ -57,13 +57,13 @@ while True:
 
         #Al presionar teclas:
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT] and player1.x<(display_width - 50):
+        if keys[pygame.K_RIGHT] and player1.x<(display_width - 50) and player1.direction != 'left':
             player1.direction = 'rigth'
-        elif keys[pygame.K_LEFT] and player1.x>(initial_point + 50):
+        elif keys[pygame.K_LEFT] and player1.x>(initial_point + 50) and player1.direction != 'rigth':
             player1.direction = 'left'
-        elif keys[pygame.K_DOWN] and player1.y<(display_heigth - 50):
+        elif keys[pygame.K_DOWN] and player1.y<(display_heigth - 50) and player1.direction != 'up':
             player1.direction = 'down'
-        elif keys[pygame.K_UP] and player1.y>(initial_point):
+        elif keys[pygame.K_UP] and player1.y>(initial_point) and player1.direction != 'down':
             player1.direction = 'up'
 
         #Desplazamiento de jugador:
@@ -98,7 +98,7 @@ while True:
 
 
 
-        #Dibujar cuerpo serpiente y cuando se choca con el cuerpo:--------------------------------------------------
+        #Dibujar cuerpo serpiente y cuando se choca con el cuerpo:
         player1.snake_body(green_lima)
         if player1.position in player1.body_positions:
             run = False
