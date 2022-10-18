@@ -150,6 +150,8 @@ class Button:
         self.y_positions = [y for y in range(self.y, (self.y+self.heigth),1)]
 
 
+
+
     def draw_button(self):
         #Dibujar box con hover y sin hover:
         if pygame.mouse.get_pos()[0] in self.x_positions and pygame.mouse.get_pos()[1] in self.y_positions:
@@ -159,6 +161,9 @@ class Button:
         #Texto del cuadrado:
         text = self.font.render('RETRY', 1, (255,255,255))
         self.display.blit(text, (self.x +45, self.y+40))
+
+
+
 
 
 
